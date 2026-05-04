@@ -1,0 +1,54 @@
+1)
+  1) Uniform Distribution with Respect to Area
+
+Total area of disk:
+A = π(10)^2 = 100π  
+
+Inner disk (radius 9):
+A = π(9)^2 = 81π  
+
+Ring area:
+= 100π - 81π = 19π  
+
+Probability:
+P(A) = 19π / 100π = 19/100 = 0.19
+
+  2) Uniform Distribution of Radius
+
+Here:
+r ~ Uniform(0, 10)
+
+Event A:
+r ∈ [9, 10]
+
+P(A) = (10 - 9) / (10 - 0) = 1/10 = 0.1
+
+   3) Why the Answers Differ
+
+- In the first model, probability depends on area
+- Outer region has more area → higher probability
+- In the second model, radius is chosen uniformly
+- This ignores that area increases with r²
+Therefore:
+- First model is physically correct
+- Second model is biased
+
+Graph Visualization(Python)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.linspace(0, 10, 500)
+
+pdf_area = (2 * r) / (10**2)
+pdf_radius = np.ones_like(r) / 10
+
+plt.plot(r, pdf_area, label="Uniform Area")
+plt.plot(r, pdf_radius, linestyle='--', label="Uniform Radius")
+
+plt.xlabel("r")
+plt.ylabel("Density")
+plt.legend()
+plt.grid()
+plt.show()
+
