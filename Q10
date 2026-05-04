@@ -1,0 +1,205 @@
+# Q10) Information Available in Continuous Random Variables
+
+We are given:
+
+T ~ N(0,1),  P ~ N(0,4), independent
+
+Joint density:
+f(T,P) = (1 / 4π) exp( -t²/2 - p²/8 )
+
+X(T,P) = T
+Y(T,P) = (T,P)
+
+---
+
+# 1) Probability Space
+
+Ω = ℝ²
+𝒜 = Borel σ-algebra on ℝ²
+P induced by density f(T,P)
+
+---
+
+# 2) σ(X)
+
+X = T only
+
+σ(X) = σ(T)
+→ all events depending only on T
+→ sets of form B × ℝ
+
+---
+
+# 3) σ(Y)
+
+Y = (T,P)
+
+σ(Y) = σ(T,P)
+= full Borel σ-algebra on ℝ²
+
+---
+
+# 4) Relation
+
+σ(X) ⊂ σ(Y)
+
+Reason: any event about T is also an event in (T,P)
+
+Conclusion:
+Y contains more information than X
+
+---
+
+# 5) Marginal of X
+
+X ~ N(0,1)
+
+fX(t) = (1/√(2π)) exp(-t²/2)
+
+---
+
+# 6) Marginal of Y
+
+Since independent:
+
+fY(t,p) = fT(t) fP(p)
+
+= (1 / 4π) exp( -t²/2 - p²/8 )
+
+---
+
+# 7) Probabilities
+
+P(X ≤ 0) = 1/2
+
+P(X > 1) = 1 - Φ(1) ≈ 0.1587
+
+P(Y ∈ (-∞,0] × ℝ)
+= P(T ≤ 0) = 1/2
+
+P(Y ∈ [-1,1] × [-2,2])
+= P(-1≤T≤1) × P(-2≤P≤2)
+≈ (0.6826)(0.9545) ≈ 0.651
+
+---
+
+# 8) Conditional distribution X | Y=(t,p)
+
+From Y we know T exactly
+
+So:
+
+X = t with probability 1
+
+→ deterministic (Dirac delta)
+
+---
+
+# 9) Conditional distribution Y | X = t
+
+Given T=t:
+
+P ~ N(0,4)
+
+So:
+
+Y | X=t = (t, P)
+
+---
+
+# 10) Interpretation
+
+Condition on X:
+→ only temperature known
+
+Condition on Y:
+→ temperature + pressure known
+
+So Y gives full system information
+
+---
+
+# 11) Measurability
+
+X = π₁(Y), where π₁(t,p)=t
+
+Thus:
+
+X is a function of Y
+⇒ X is measurable w.r.t σ(Y)
+
+---
+
+# 12) Python Visualization
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Grid for joint density
+t = np.linspace(-4, 4, 200)
+p = np.linspace(-8, 8, 200)
+T, P = np.meshgrid(t, p)
+
+# Joint density
+f = (1/(4*np.pi)) * np.exp(-T**2/2 - P**2/8)
+
+plt.figure(figsize=(6,5))
+plt.contourf(T, P, f, levels=50)
+plt.title("Joint Density f(T,P)")
+plt.xlabel("T")
+plt.ylabel("P")
+plt.colorbar()
+plt.show()
+
+# Marginal density of X
+plt.figure()
+plt.plot(t, norm.pdf(t), label="f_X(t)")
+plt.title("Marginal Density of X")
+plt.xlabel("t")
+plt.legend()
+plt.show()
+
+# Illustration of sigma-algebras
+# Vertical strips represent σ(X) (depends only on T)
+plt.figure(figsize=(6,5))
+plt.contourf(T, P, f, levels=20, alpha=0.6)
+
+for val in [-2, -1, 0, 1, 2]:
+    plt.axvline(val, linestyle='--')
+
+plt.title("σ(X): Vertical strips (depends only on T)")
+plt.xlabel("T")
+plt.ylabel("P")
+plt.show()
+```
+
+---
+
+# 13) Differential Entropy of X
+
+h(X) = (1/2) ln(2πe)
+
+---
+
+# 14) Differential Entropy of Y
+
+h(Y) = h(T) + h(P)
+
+= (1/2)ln(2πe) + (1/2)ln(8πe)
+
+---
+
+# 15) Conditional Entropy h(Y|X)
+
+h(Y|X) = h(P)
+= (1/2) ln(8πe)
+
+---
+
+# 16) Conditional Entropy h(X|Y)
+
+h(X|Y) = -∞
+
+Reason: deterministic continuous variable → Dirac distribution → negative infinite entropy
