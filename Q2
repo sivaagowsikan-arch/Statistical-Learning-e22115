@@ -1,0 +1,75 @@
+1) Random Endpoints Model
+
+- Choose two random points on the circle
+- This defines a chord
+
+Chord length:
+L = 2R sin(θ/2)
+
+Condition:
+2R sin(θ/2) > √3 R  
+
+ sin(θ/2) > √3/2  
+ θ > 120°  
+
+Since θ is uniform in [0°, 180°]:
+
+P = (180 - 120) / 180 = 1/3  
+
+Answer: P = 1/3
+
+2) Random Radius Model
+
+- Choose a random radius
+- Pick a point uniformly on it
+- Draw perpendicular chord
+
+Let r = distance from center
+
+Chord length:
+L = 2√(R² - r²)
+
+Condition:
+2√(R² - r²) > √3 R  
+
+ R² - r² > 3/4 R²  
+ r < R/2  
+
+Since r is uniform in [0, R]:
+
+P = (R/2) / R = 1/2  
+
+Answer: P = 1/2
+
+3) Random Midpoint (Area Model)
+
+- Choose midpoint uniformly inside the circle
+
+Condition:
+r < R/2  
+
+Now probability depends on area:
+
+Small circle area = π(R/2)² = (1/4)πR²  
+Total area = πR²  
+
+P = (1/4)πR² / πR² = 1/4  
+
+Answer: P = 1/4
+
+4) Explanation
+
+- Each method defines "random chord" differently
+- Model 1 → uniform angle  
+- Model 2 → uniform distance  
+- Model 3 → uniform area  
+
+These are not the same distributions  
+So probabilities are different  
+
+Final Answers
+
+- Model 1: 1/3  
+- Model 2: 1/2  
+- Model 3: 1/4  
+
